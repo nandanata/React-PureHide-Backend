@@ -20,9 +20,10 @@ from .views import (
     MenWalletBagProductsView,MenBeltBagProductsView,MenShoesView,MenChelseaView,
     MenDesertView,WomenHandView,WomenToteView,WomenSlingView,WomenTrView,WomenWalletView,WomenBeltView,WomenFlipView,WomenSandalView,
     WomenLoaferView,KidsTravelView,KidsBackpackView,KidsDiaperView,BagCharmView, KidShoeView, KidsChelView,KidsDesView,AddWishlistView,
-    RemoveWishlistView,
-    WishlistListView
-  
+    RemoveWishlistView,WishlistListView,CartListView,AddCartView,RemoveCartView,UpdateCartView,MouldWomenSlingProductsView,ConvoyBriefcaseProductsView,
+    CurrentPlaceOrderView,AdminProductDeleteView, AdminProductCreateView,
+    SaveContactInformationView,AdminProductListView, AdminProductEditView,AdminProductDetailView,AdminProductImageUpdateView,
+    PlaceOrderView,OrderSummaryView,TransitCrossProductsView,reset_password, verify_otp,forgot_password,RequestAccountDeletionView,
 )
 
 urlpatterns = [
@@ -49,7 +50,7 @@ urlpatterns = [
         name='logout'
     ),
 
-    path('reset-password/', views.reset_password),
+  
 
     # VIEW USER BY ID
     path(
@@ -57,6 +58,22 @@ urlpatterns = [
         views.UserDetailView.as_view(),
         name='user-detail'
     ),
+    # DELETE PROFILE IMAGE
+
+path(
+
+    'users/<int:user_id>/profile-image/',
+
+    views.DeleteProfileImageView.as_view(),
+
+    name='delete-profile-image'
+
+),
+
+    path(
+    "users/<int:user_id>/request-delete/",
+    RequestAccountDeletionView.as_view()
+),
 
 
     path(
@@ -336,4 +353,114 @@ path(
         RemoveWishlistView.as_view()
     ),
 
+    # ---------------- CART ----------------
+
+path("cart/", CartListView.as_view()),
+path("cart/add/", AddCartView.as_view()),
+path("cart/remove/<int:cart_id>/", RemoveCartView.as_view()),
+path("cart/update/<int:cart_id>/", UpdateCartView.as_view()),
+
+
+        # ---------mould----------
+path(
+    "mould-women-sling-products/",
+    MouldWomenSlingProductsView.as_view()
+),
+
+path(
+    "convoy-briefcase-products/",
+    ConvoyBriefcaseProductsView.as_view()
+),
+path(
+    "transit-cross-products/",
+    TransitCrossProductsView.as_view()
+),
+
+
+path(
+    "best-seller-products/",
+    views.best_seller_products,
+),
+
+
+
+path(
+    "place-order/",
+    PlaceOrderView.as_view(),
+    name="place-order"
+),
+
+path(
+    "place-order/current/",
+    CurrentPlaceOrderView.as_view()
+),
+
+path(
+    "place-order/contact/<int:order_id>/",
+    SaveContactInformationView.as_view()
+),
+path(
+    "place-order/order-summary/",
+    OrderSummaryView.as_view()
+),
+
+
+path(
+    "forgot-password/",
+    forgot_password,
+    name="forgot-password"
+),
+
+path(
+    "verify-otp/",
+    verify_otp,
+    name="verify-otp"
+),
+
+path(
+    "reset-password/",
+    reset_password,
+    name="reset-password"
+),
+
+# -----------------------------------
+# ADMIN PRODUCT
+# # -----------------------------------
+# ADMIN PRODUCT
+# -----------------------------------
+
+path(
+    "admin/products/",
+    AdminProductListView.as_view(),
+    name="admin-product-list"
+),
+
+path(
+    "admin/products/<int:pk>/edit/",
+    AdminProductEditView.as_view(),
+    name="admin-product-edit"
+),
+
+path(
+    "admin/products/<int:pk>/",
+    AdminProductDetailView.as_view(),
+    name="admin-product-detail"
+),
+
+path(
+    "admin/products/<int:pk>/image/",
+    AdminProductImageUpdateView.as_view(),
+),
+
+path(
+    "admin/products/<int:pk>/delete/",
+    AdminProductDeleteView.as_view(),
+    name="admin-product-delete"
+),
+
+path(
+    "admin/products/add/",
+    AdminProductCreateView.as_view(),
+    name="admin-product-create"
+),
 ]

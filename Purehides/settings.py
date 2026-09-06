@@ -155,3 +155,22 @@ REST_FRAMEWORK = {
     ),
 
 }
+
+
+# ----------------------------------------
+# EMAIL CONFIGURATION
+# ----------------------------------------
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "nandanataammu2003@gmail.com"
+
+EMAIL_HOST_PASSWORD = "yevz pdyd hesi iwpg"
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
