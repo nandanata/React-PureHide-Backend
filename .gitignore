@@ -31,3 +31,7 @@ Thumbs.db
 
 # User uploaded profile images
 media/profile_images/
+
+
+# Local settings backup
+settings_backups.py

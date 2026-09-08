@@ -11,23 +11,29 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
+
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / ".env")
+
+
 AUTH_USER_MODEL = 'hideapp.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = []
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6h=!che=v)d&n&3oouf*_+)37atq5ea3poy!n*^_1$i$idw-c4'
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-local-development-key")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -84,11 +90,11 @@ WSGI_APPLICATION = 'Purehides.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'leathers',  
-        'USER': 'root',             
-        'PASSWORD': '1234', 
-        'HOST': 'localhost',        
-        'PORT': '3306',            
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
@@ -135,9 +141,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://nandanata.github.io",
 ]
 
 REST_FRAMEWORK = {
