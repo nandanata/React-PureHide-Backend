@@ -35,3 +35,6 @@ media/profile_images/
 
 # Local settings backup
 settings_backups.py
+
+# Django static files
+staticfiles/
